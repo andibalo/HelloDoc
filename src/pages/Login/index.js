@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { ILLogo } from "../../../assets";
 import { Input, Link, Button, Gap } from "../../components";
 
-const Login = () => {
+const Login = ({ navigation }) => {
   return (
     <View style={styles.page}>
       <ILLogo />
@@ -14,7 +14,11 @@ const Login = () => {
       <Gap height={10} />
       <Link title="Forgot Password" size={12} />
       <Gap height={40} />
-      <Button title="Sign In" type="primary" />
+      <Button
+        title="Sign In"
+        type="primary"
+        onPress={() => navigation.replace("MainApp")}
+      />
       <Gap height={30} />
       <Link title="Create Account" size={16} align="center" />
     </View>
