@@ -1,10 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import BtnIcon from "./BtnIcon";
 import IconOnly from "./IconOnly";
 
-const Button = ({ title, type, onPress, icon }) => {
+const Button = ({ title, type, onPress, icon, disabled }) => {
   if (type === "icon-only") {
     return <IconOnly icon={icon} onPress={onPress} />;
+  }
+
+  if (type === "btn-icon") {
+    return <BtnIcon disabled={disabled} />;
   }
 
   return (

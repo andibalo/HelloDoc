@@ -2,8 +2,13 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button, Gap } from "../../atom";
 import { colors } from "../../../utils";
+import DarkProfile from "./DarkProfile";
 
 const Header = ({ title, navigation, type }) => {
+  if (type === "dark-profile") {
+    return <DarkProfile title="Nairobi Putri Hayza" onPress={() => navigation.goBack()}/>;
+  }
+
   return (
     <View style={styles.container(type)}>
       <Button
@@ -26,6 +31,8 @@ const styles = StyleSheet.create({
     backgroundColor: type === "dark" ? colors.secondary : colors.white,
     flexDirection: "row",
     alignItems: "center",
+    borderBottomLeftRadius: type === "dark" ? 20 : 0,
+    borderBottomRightRadius: type === "dark" ? 20 : 0,
   }),
   text: (type) => ({
     flex: 1,

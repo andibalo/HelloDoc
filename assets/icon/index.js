@@ -9,6 +9,13 @@ import ICMessageActive from "./ic-messages-active.svg";
 import ICHospital from "./ic-hospitals.svg";
 import ICHospitalActive from "./ic-hospitals-active.svg";
 import ICStar from "./ic-star.svg";
+import ICNext from "./ic-next.svg";
+import ICSendDark from "./ic-send-dark.svg";
+import ICSendLight from "./ic-send-light.svg";
+import ICRate from "./ic-rate.svg";
+import ICHelp from "./ic-help.svg";
+import ICLang from "./ic-language.svg";
+import ICEditProfile from "./ic-edit-profile.svg";
 
 export {
   ICBackDark,
@@ -22,4 +29,11 @@ export {
   ICMessage,
   ICMessageActive,
   ICStar,
+  ICNext,
+  ICSendDark,
+  ICSendLight,
+  ICEditProfile,
+  ICHelp,
+  ICLang,
+  ICRate,
 };
