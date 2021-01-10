@@ -3,15 +3,15 @@ import { StyleSheet, Text, View } from "react-native";
 import { Button, Gap } from "../../atom";
 import { colors } from "../../../utils";
 
-const Header = ({ title, navigation }) => {
+const Header = ({ title, navigation, type }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container(type)}>
       <Button
         type="icon-only"
-        icon="dark-back"
+        icon={type === "dark" ? "light-back" : "dark-back"}
         onPress={() => navigation.goBack()}
       />
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.text(type)}>{title}</Text>
       <Gap width={24} />
     </View>
   );
@@ -20,17 +20,17 @@ const Header = ({ title, navigation }) => {
 export default Header;
 
 const styles = StyleSheet.create({
-  container: {
+  container: (type) => ({
     paddingHorizontal: 16,
     paddingVertical: 30,
-    backgroundColor: colors.white,
+    backgroundColor: type === "dark" ? colors.secondary : colors.white,
     flexDirection: "row",
     alignItems: "center",
-  },
-  text: {
+  }),
+  text: (type) => ({
     flex: 1,
     textAlign: "center",
     fontSize: 20,
-    color: colors.text.primary,
-  },
+    color: type === "dark" ? colors.white : colors.text.primary,
+  }),
 });

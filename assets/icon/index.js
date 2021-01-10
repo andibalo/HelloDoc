@@ -1,4 +1,5 @@
 import ICBackDark from "./ic-back-dark.svg";
+import ICBackLight from "./ic-back-light.svg";
 import ICRemovePhoto from "./ic-remove-photo.svg";
 import ICAddPhoto from "./ic-add-photo.svg";
 import ICDoctor from "./ic-doctor.svg";
@@ -11,6 +12,7 @@ import ICStar from "./ic-star.svg";
 
 export {
   ICBackDark,
+  ICBackLight,
   ICAddPhoto,
   ICRemovePhoto,
   ICDoctor,

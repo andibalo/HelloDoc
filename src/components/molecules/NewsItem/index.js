@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     borderBottomWidth: 1,
     borderBottomColor: colors.border.primary,
+    paddingHorizontal: 16,
   },
   title: {
     fontSize: 16,

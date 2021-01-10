@@ -9,37 +9,59 @@ import {
 } from "../../components";
 import { colors } from "../../utils";
 
-const Doctors = () => {
+const Doctors = ({ navigation }) => {
   return (
     <View style={styles.page}>
       <View style={styles.pageOverlay}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Gap height={30} />
-          <HomeProfile />
-          <Text style={styles.welcome}>
-            Who do you want to consult with today?
-          </Text>
+          <View style={styles.sectionWrapper}>
+            <Gap height={30} />
+            <HomeProfile />
+            <Text style={styles.welcome}>
+              Who do you want to consult with today?
+            </Text>
+          </View>
+
           <View style={styles.scrollWrapper}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={styles.category}>
                 <Gap width={16} />
-                <DoctorCategory />
-                <DoctorCategory />
-                <DoctorCategory />
-                <DoctorCategory />
+                <DoctorCategory
+                  category="dokter umum"
+                  onPress={() => navigation.navigate("ChooseDoctor")}
+                />
+                <DoctorCategory
+                  category="psikiater"
+                  onPress={() => navigation.navigate("ChooseDoctor")}
+                />
+                <DoctorCategory
+                  category="dokter obat"
+                  onPress={() => navigation.navigate("ChooseDoctor")}
+                />
+                <DoctorCategory
+                  category="dokter umum"
+                  onPress={() => navigation.navigate("ChooseDoctor")}
+                />
+                <Gap width={6} />
               </View>
             </ScrollView>
           </View>
 
-          <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
-          <DoctorRating />
-          <DoctorRating />
-          <DoctorRating />
-          <Text style={styles.sectionLabel}>Good News</Text>
+          <View style={styles.sectionWrapper}>
+            <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
+            <DoctorRating />
+            <DoctorRating />
+            <DoctorRating />
+          </View>
+          <View style={styles.sectionWrapper}>
+            <Text style={styles.sectionLabel}>Good News</Text>
+          </View>
+
           <NewsItem />
           <NewsItem />
           <NewsItem />
           <NewsItem />
+
           <Gap height={30} />
         </ScrollView>
       </View>
@@ -57,7 +79,6 @@ const styles = StyleSheet.create({
   pageOverlay: {
     backgroundColor: colors.white,
     flex: 1,
-    paddingHorizontal: 16,
 
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
@@ -73,14 +94,15 @@ const styles = StyleSheet.create({
   category: {
     flexDirection: "row",
   },
-  scrollWrapper: {
-    marginHorizontal: -16,
-  },
+
   sectionLabel: {
     fontSize: 16,
     fontWeight: "700",
     color: colors.text.primary,
     marginTop: 30,
     marginBottom: 16,
+  },
+  sectionWrapper: {
+    paddingHorizontal: 16,
   },
 });

@@ -1,11 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { ICBackDark } from "../../../../assets";
+import { ICBackDark, ICBackLight } from "../../../../assets";
 
 const IconOnly = ({ icon, onPress }) => {
   const Icon = () => {
     if (icon === "dark-back") {
       return <ICBackDark />;
+    }
+
+    if (icon === "light-back") {
+      return <ICBackLight />;
     }
 
     return <ICBackDark />;
