@@ -1,11 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { ILNullPhoto, ICStar } from "../../../../assets";
 import { colors } from "../../../utils";
 
-const DoctorRating = () => {
+const DoctorRating = ({ onPress }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={ILNullPhoto} style={styles.avatar} />
       <View>
         <Text style={styles.name}>Alexa Rachel</Text>
@@ -19,7 +19,7 @@ const DoctorRating = () => {
         <ICStar />
         <ICStar />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     marginBottom: 16,
+    alignItems: "center",
   },
   rating: {
     marginLeft: "auto",

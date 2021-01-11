@@ -49,7 +49,9 @@ const Doctors = ({ navigation }) => {
 
           <View style={styles.sectionWrapper}>
             <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
-            <DoctorRating />
+            <DoctorRating
+              onPress={() => navigation.navigate("DoctorProfile")}
+            />
             <DoctorRating />
             <DoctorRating />
           </View>

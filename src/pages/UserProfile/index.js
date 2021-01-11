@@ -8,13 +8,18 @@ const UserProfile = ({ navigation }) => {
     <View style={styles.page}>
       <Header title="Profile" navigation={navigation} />
       <Gap height={10} />
-      <Profile />
+      <Profile
+        name="Andi Usman Balo"
+        desc="Software Engineer"
+        isAvatarRemovable
+      />
       <Gap height={14} />
       <List
         title="Edit Profile"
         desc="Make Changes to your profile"
         type="next"
         icon="edit-profile"
+        onPress={() => navigation.navigate("UpdateProfile")}
       />
       <List
         title="Change Language"

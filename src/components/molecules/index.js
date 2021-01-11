@@ -10,6 +10,7 @@ import ChatItem from "./ChatItem";
 import InputChat from "./InputChat";
 import List from "./List";
 import Profile from "./Profile";
+import ProfileItem from "./ProfileItem";
 
 export {
   List,
@@ -24,4 +25,5 @@ export {
   ChatItem,
   InputChat,
   Profile,
+  ProfileItem,
 };

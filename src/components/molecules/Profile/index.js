@@ -1,16 +1,21 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import { ILNullPhoto } from "../../../../assets";
+import { ICRemovePhoto, ILNullPhoto } from "../../../../assets";
 import { colors } from "../../../utils";
 
-const Profile = () => {
+const Profile = ({ name, desc, isAvatarRemovable }) => {
   return (
     <View style={styles.container}>
       <View style={styles.avatarBorder}>
         <Image source={ILNullPhoto} style={styles.avatar} />
+        {isAvatarRemovable && <ICRemovePhoto style={styles.remove} />}
       </View>
-      <Text style={styles.name}>Andi Usman Balo</Text>
-      <Text style={styles.profession}>Software Engineer</Text>
+      {name && (
+        <View>
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.profession}>{desc}</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -48,5 +53,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 4,
     color: colors.text.secondary,
+  },
+  remove: {
+    position: "absolute",
+    bottom: 4,
+    right: 4,
   },
 });
