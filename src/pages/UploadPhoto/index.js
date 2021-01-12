@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { Button, Gap, Header, Link } from "../../components";
 import { ICAddPhoto, ICRemovePhoto, ILNullPhoto } from "../../../assets";
-import { colors } from "../../utils";
+import { colors, storeData } from "../../utils";
 import * as ImagePicker from "expo-image-picker";
-const UploadPhoto = ({ navigation }) => {
+import { Firebase } from "../../config";
+
+const UploadPhoto = ({ navigation, route }) => {
   const [hasPhoto, setHasPhoto] = useState(false);
   const [picture, setPicture] = useState(ILNullPhoto);
+  const [pictureData, setPictureData] = useState(null);
+  const { fullname, pekerjaan, uid, email } = route.params;
 
   const openImagePickerAsync = async () => {
     let permissionResult = await ImagePicker.requestCameraPermissionsAsync();
@@ -18,18 +22,42 @@ const UploadPhoto = ({ navigation }) => {
 
     let pickerResult = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
+      base64: true,
+      quality: 0.5,
     });
 
-    console.log(pickerResult);
+    //console.log(pickerResult);
 
     if (pickerResult.cancelled) {
       setPicture(ILNullPhoto);
       setHasPhoto(false);
       return;
     }
-
+    setPictureData(
+      `data:${pickerResult.type}/jpeg;base64, ${pickerResult.base64}`
+    );
     setPicture({ uri: pickerResult.uri });
     setHasPhoto(true);
+  };
+
+  const handleUploadAndContinue = async () => {
+    try {
+      await Firebase.database()
+        .ref(`/users/${uid}/`)
+        .update({ photo: pictureData });
+
+      await storeData(
+        "user",
+        JSON.stringify({
+          ...route.params,
+          photo: pictureData,
+        })
+      );
+
+      navigation.replace("MainApp");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -56,7 +84,7 @@ const UploadPhoto = ({ navigation }) => {
           <Button
             title="Upload and Continue"
             disable={hasPhoto}
-            onPress={() => navigation.replace("MainApp")}
+            onPress={() => handleUploadAndContinue()}
           />
           <Gap height={30} />
           <Link

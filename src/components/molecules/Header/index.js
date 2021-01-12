@@ -4,18 +4,26 @@ import { Button, Gap } from "../../atom";
 import { colors } from "../../../utils";
 import DarkProfile from "./DarkProfile";
 
-const Header = ({ title, navigation, type }) => {
+const Header = ({ title, navigation, type, noBack }) => {
   if (type === "dark-profile") {
-    return <DarkProfile title="Nairobi Putri Hayza" onPress={() => navigation.goBack()}/>;
+    return (
+      <DarkProfile
+        title="Nairobi Putri Hayza"
+        onPress={() => navigation.goBack()}
+      />
+    );
   }
 
   return (
     <View style={styles.container(type)}>
-      <Button
-        type="icon-only"
-        icon={type === "dark" ? "light-back" : "dark-back"}
-        onPress={() => navigation.goBack()}
-      />
+      {!noBack && (
+        <Button
+          type="icon-only"
+          icon={type === "dark" ? "light-back" : "dark-back"}
+          onPress={() => navigation.goBack()}
+        />
+      )}
+
       <Text style={styles.text(type)}>{title}</Text>
       <Gap width={24} />
     </View>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Header, Input, Button, Gap, Loading } from "../../components";
-import { colors, useForm } from "../../utils";
+import { colors, useForm, storeData, deleteAllData } from "../../utils";
 import { Firebase } from "../../config";
 import { showMessage } from "react-native-flash-message";
 
@@ -24,17 +24,22 @@ const Register = ({ navigation }) => {
         form.password
       );
 
-      console.log("AUTH", authRes);
+      //console.log("AUTH", authRes);
 
-      await Firebase.database().ref(`/users/${authRes.user.uid}/`).set({
+      const data = {
         fullname: form.fullname,
         pekerjaan: form.pekerjaan,
         email: form.email,
-      });
+        uid: authRes.user.uid,
+      };
+
+      await Firebase.database().ref(`/users/${authRes.user.uid}/`).set(data);
+
+      await storeData("user", JSON.stringify(data));
 
       setForm("reset");
       setLoading(false);
-      navigation.replace("UploadPhoto");
+      navigation.navigate("UploadPhoto", data);
     } catch (error) {
       console.log(error);
       setLoading(false);
