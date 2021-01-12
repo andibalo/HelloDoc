@@ -1,25 +1,63 @@
-import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { Button, Gap, Header, Link } from "../../components";
-import { ICAddPhoto, ILNullPhoto } from "../../../assets";
+import { ICAddPhoto, ICRemovePhoto, ILNullPhoto } from "../../../assets";
 import { colors } from "../../utils";
-
+import * as ImagePicker from "expo-image-picker";
 const UploadPhoto = ({ navigation }) => {
+  const [hasPhoto, setHasPhoto] = useState(false);
+  const [picture, setPicture] = useState(ILNullPhoto);
+
+  const openImagePickerAsync = async () => {
+    let permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+    });
+
+    console.log(pickerResult);
+
+    if (pickerResult.cancelled) {
+      setPicture(ILNullPhoto);
+      setHasPhoto(false);
+      return;
+    }
+
+    setPicture({ uri: pickerResult.uri });
+    setHasPhoto(true);
+  };
+
   return (
     <View style={styles.page}>
-      <Header title="Upload Photo" />
+      <Header title="Upload Photo" navigation={navigation} />
       <View style={styles.content}>
         <View style={styles.profile}>
-          <View style={styles.avatarWrapper}>
-            <Image source={ILNullPhoto} style={styles.avatar} />
-            <ICAddPhoto style={styles.addPhoto} />
-          </View>
+          <TouchableOpacity
+            style={styles.avatarWrapper}
+            onPress={openImagePickerAsync}
+          >
+            <Image source={picture} style={styles.avatar} />
+            {hasPhoto ? (
+              <ICRemovePhoto style={styles.addPhoto} />
+            ) : (
+              <ICAddPhoto style={styles.addPhoto} />
+            )}
+          </TouchableOpacity>
           <Text style={styles.name}>Andi Usman Balo</Text>
           <Text style={styles.profession}>Software Engineer</Text>
         </View>
 
         <View>
-          <Button title="Upload and Continue" />
+          <Button
+            title="Upload and Continue"
+            disable={hasPhoto}
+            onPress={() => navigation.replace("MainApp")}
+          />
           <Gap height={30} />
           <Link
             title="Skip this for now"
@@ -49,6 +87,7 @@ const styles = StyleSheet.create({
   avatar: {
     width: 110,
     height: 110,
+    borderRadius: 110 / 2,
   },
   avatarWrapper: {
     height: 130,

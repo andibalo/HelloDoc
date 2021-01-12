@@ -8,6 +8,10 @@ export const useForm = (initialState) => {
   return [
     values,
     (key, value) => {
+      if (key === "reset") {
+        return setValues(initialState);
+      }
+
       return setValues({ ...values, [key]: value });
     },
   ];

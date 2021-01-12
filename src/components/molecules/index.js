@@ -11,6 +11,7 @@ import InputChat from "./InputChat";
 import List from "./List";
 import Profile from "./Profile";
 import ProfileItem from "./ProfileItem";
+import Loading from "./Loading";
 
 export {
   List,
@@ -26,4 +27,5 @@ export {
   InputChat,
   Profile,
   ProfileItem,
+  Loading,
 };
