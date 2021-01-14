@@ -11,6 +11,7 @@ import Chat from "./Chat";
 import UserProfile from "./UserProfile";
 import UpdateProfile from "./UpdateProfile";
 import DoctorProfile from "./DoctorProfile";
+import ChangePassword from "./ChangePassword";
 
 export {
   Splash,
@@ -26,4 +27,5 @@ export {
   UserProfile,
   UpdateProfile,
   DoctorProfile,
+  ChangePassword,
 };
